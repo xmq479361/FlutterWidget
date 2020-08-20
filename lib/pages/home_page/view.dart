@@ -15,16 +15,16 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-            height: 60,
-            color: Colors.cyan,
-            child: Row(children: [
-              Expanded(
-                  child: GestureDetector(
-                onTapUp: (s) => dispatch(HomeActionCreator.enterEventAction()),
-                child: Text("Calendar Widget", textAlign: TextAlign.center),
-              ))
-            ]))
+        GestureDetector(
+            onTapUp: (s) => dispatch(HomeActionCreator.enterEventAction()),
+            child: Container(
+                height: 60,
+                color: Colors.cyan,
+                child: Row(children: [
+                  Expanded(
+                    child: Text("Calendar Widget", textAlign: TextAlign.center),
+                  )
+                ])))
       ],
     )),
   );

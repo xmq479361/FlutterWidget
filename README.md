@@ -21,9 +21,10 @@ Some Widget of Flutter
 <img src="https://github.com/xmq479361/FlutterWidget/raw/master/screenshot/create_time_select.jpg" alt="Screenshot" style="width:150px;"/>
 
 
-#### Thanks
+## Thanks
 [alibaba/fish-redux](https://github.com/alibaba/fish-redux)<br>
 [dylanwuzh/flutter-cupertino-date-picker](https://github.com/dylanwuzh/flutter-cupertino-date-picker) 做了改造添加了 [年-月-日-时-分] 选择器
+[CimZzz/quicklibs](https://github.com/CimZzz/quicklibs) 
 
-#### License
+## License
 Apache 2.0 license. See LICENSE for details.
