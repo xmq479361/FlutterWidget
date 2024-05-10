@@ -1,51 +1,33 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
 import 'QCalModel.dart';
-import 'QCalNotification.dart';
 import 'QCalculator.dart';
 
-typedef DateTime CalcDateTime(int offset);
 enum Mode { WEEK, MONTH, DETAIL }
 
+/// 最大左右可滑动页码数。
 const int maxSize = 200;
+
+/// 当前默认页码位置id
 const int offsetMid = maxSize >> 1;
 
+/// 内存缓存记录类
 class QCalHolder {
   Mode mode;
   int currPage = offsetMid;
   double fullHeight = 0, centerHeight = 0, minHeight = 50.0;
+  Date focusDateTime = Date.from(DateTime.now());
 
   QCalHolder({this.mode = Mode.WEEK}) {
     fullHeight = window.physicalSize.height / window.devicePixelRatio;
   }
 
-  focusDateByPage(BuildContext context, int page) {
-    Date _focusDateTime = getDateTime(page);
-    // print("focusDateByPage: ${page}/${currPage}, ${mode}, ${focusDateTime} = ${_focusDateTime}");
-    focusDateTime = _focusDateTime;
-    currPage = page;
-    QCalNotification.dispatchTo(context, this);
-  }
-
-  focusDate(BuildContext context, Date date) {
-    // print("focusDate: ${date}/${currPage}, ${mode}, ${focusDateTime} ");
-    focusDateTime = date;
-    QCalNotification.dispatchTo(context, this);
-  }
-
-  Date focusDateTime = Date.from(DateTime.now());
-  // Date focusDateTime = Date.from(DateTime(2020, 4, 20));
-
   Date getDateTime(int offs) {
-    int offset = offs - currPage;
-    // print("  ===getDateTime($mode): ${offset}, ${focusDateTime}");
     switch (mode) {
       case Mode.WEEK:
-        return QCalculator.offsetWeekTo(focusDateTime, offset);
+        return QCalculator.offsetWeekTo(focusDateTime, offs - currPage);
       default:
-        return QCalculator.offsetMonthTo(focusDateTime, offset);
+        return QCalculator.offsetMonthTo(focusDateTime, offs - currPage);
     }
   }
 }

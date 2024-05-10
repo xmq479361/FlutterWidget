@@ -17,14 +17,6 @@ Widget createApp() {
       if (page.isTypeof<GlobalBaseState>()) {
         page.connectExtraStore<GlobalState>(GlobalStore.store,
             (Object pagestate, GlobalState appState) {
-          // final GlobalBaseState p = pagestate;
-          // if (p.themeColor != appState.themeColor) {
-          //   if (pagestate is Cloneable) {
-          //     final Object copy = pagestate.clone();
-          //     final GlobalBaseState newState = copy;
-          //     return newState..themeColor = appState.themeColor;
-          //   }
-          // }
           return pagestate;
         });
       }

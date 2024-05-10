@@ -14,6 +14,7 @@ class ListState implements Cloneable<ListState> {
   ScrollController scrollCtrl;
   Key scrollViewKey;
   QCalHolder model;
+  Timer _timer;
 
   @override
   ListState clone() {
@@ -40,16 +41,13 @@ class ListState implements Cloneable<ListState> {
         break;
       case Mode.DETAIL:
       default:
-        _scroll(-(scrollCtrl.offset));
+        _scroll(0);
     }
   }
 
-  /**
-   * 延时检查 是否模式切换
-   */
-  Timer _timer;
+  /// 延时检查 是否模式切换
   _scroll(offset) {
-    print("State _scroll: ${offset}");
+    print("State _scroll: $offset");
     if (_timer != null) _timer.cancel();
     _timer = Timer(Duration(milliseconds: 2), () {
       scrollCtrl.animateTo(offset,

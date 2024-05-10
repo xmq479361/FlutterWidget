@@ -5,6 +5,7 @@ import 'calendar_list/QCalendarRender.dart';
 import '../event_component/state.dart';
 import 'state.dart';
 
+/// 自定义日程View渲染处理
 class EventQCalendarRender extends QCalendarRender {
   ListState eventState;
   EventQCalendarRender(this.eventState);
@@ -60,7 +61,7 @@ class EventQCalendarRender extends QCalendarRender {
     List<EventState> dateEvents = eventState.dateEvents(date);
     if (dateEvents.isEmpty) return;
     if (model.mode == Mode.DETAIL && fullSize.height >= model.fullHeight) {
-      print("当天数据$date(${dateEvents.length}), $dateEvents");
+      // print("当天数据$date(${dateEvents.length}), $dateEvents");
       final double cirSize = circleSize(size);
       var margin = 4.0, offsetY = cirSize, width = size.width - margin * 2;
       for (EventState event in dateEvents) {

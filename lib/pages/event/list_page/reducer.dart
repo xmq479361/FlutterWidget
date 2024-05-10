@@ -10,8 +10,8 @@ Reducer<ListState> buildReducer() {
     <Object, Reducer<ListState>>{
       ListAction.initEvent: _onInitEventAction,
       ListAction.edit: _onEditAction,
-      // ListAction.focusDate: _onFocusDate,
       ListAction.onFocusDate: _onFocusDate,
+      ListAction.onPageChanged: _onPageChanged,
     },
   );
 }
@@ -50,6 +50,25 @@ ListState _onEditAction(ListState state, Action action) {
         .toList();
 }
 
+ListState _onPageChanged(ListState state, Action action) {
+  print("reducer: _onPageChanged: ${action.payload} : ${state}");
+  DateTime dateTime =
+      action.payload.add(Duration(hours: DateTime.now().hour + 1));
+
+  final ListState newState = state.clone()
+    ..selectDate = dateTime
+    ..curDateEvents = state.events
+        .where((event) => isSameDate(event.startTime, dateTime))
+        .toList()
+    // ..model.mode = state.model.mode
+    // ..model.mode = Mode.MONTH
+    // ..model.mode = Mode.WEEK
+    // ..modifyMode()
+  ;
+  // newState.focusDate(action., action.payload);
+  return newState;
+}
+
 ListState _onFocusDate(ListState state, Action action) {
   print("reducer: _onFocusDate: ${action.payload}");
   DateTime dateTime =
@@ -61,7 +80,8 @@ ListState _onFocusDate(ListState state, Action action) {
         .where((event) => isSameDate(event.startTime, dateTime))
         .toList()
     ..model.mode = Mode.WEEK
-    ..modifyMode();
+    ..modifyMode()
+  ;
   // newState.focusDate(action., action.payload);
   return newState;
 }
